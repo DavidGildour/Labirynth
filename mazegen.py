@@ -49,9 +49,8 @@ def menu_about(size, dirs):
     input()
     return getmenu(size, dirs)
 
-def options_controls(size, dirs, optn = 0):
-    if optn == 0:
-        print("SET CONTROLS:")
+def options_controls(size, dirs):
+    print("SET CONTROLS:")
     t = 0
     while t <= 3:
         if t == 0:
@@ -69,7 +68,7 @@ def options_controls(size, dirs, optn = 0):
     return menu_options(size, dirs)
 
 def options_size(size, dirs):
-    size = int(input('Set the size of the maze (from 3 up to 34 but for comfortable vision you souldnt exceed 14): '))
+    size = int(input('Set the size of the maze (from 3 up to 34 but for comfortable vision you shouldnt exceed 14): '))
     return menu_options(size, dirs)
 
 def print_grid(grid, pos, ver_walls, md, size):

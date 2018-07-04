@@ -16,7 +16,6 @@ dirs = {
     'right': 'r'
 }
 size = 5
-start = None
 
 flag, size, dirs = getmenu(size, dirs)
 
