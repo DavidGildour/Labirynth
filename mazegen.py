@@ -1,5 +1,5 @@
 """TO DO:
-MAKE MENU"""
+ENHANCE MAZE GENERATING ALGORITHMS"""
 
 import random
 from symbols import symbls
@@ -51,20 +51,10 @@ def menu_about(size, dirs):
 
 def options_controls(size, dirs):
     print("SET CONTROLS:")
-    t = 0
-    while t <= 3:
-        if t == 0:
-             dirs['up'] = input('Press button for "up": ')
-             t += 1
-        if t == 1:
-            dirs['down'] = input('Press button for "down": ')
-            t += 1
-        if t == 2:
-            dirs['left'] = input('Press button for "left": ')
-            t += 1
-        if t == 3:
-            dirs['right'] = input('Press button for "right": ')
-            t += 1
+    dirs['up'] = input('Press button for "up": ')
+    dirs['down'] = input('Press button for "down": ')
+    dirs['left'] = input('Press button for "left": ')
+    dirs['right'] = input('Press button for "right": ')
     return menu_options(size, dirs)
 
 def options_size(size, dirs):
