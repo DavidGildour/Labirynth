@@ -19,8 +19,10 @@ size = 5
 
 flag, size, dirs = getmenu(size, dirs)
 
-grid, walls = mazegen(size)
-position = '{}'.format(grid[size*2][size])
+if flag != False:
+    grid, walls = mazegen(size)
+    position = '{}'.format(grid[size*2][size])
+
 while True:
     if flag == False or dir == 'quit':
         print('Thanks for playing!')
