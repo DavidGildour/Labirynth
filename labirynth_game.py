@@ -24,14 +24,16 @@ if flag != False:
     grid = mazegen(size)
     start_cell = grid[size**2 - 1]
     position = start_cell.row + start_cell.col
+    steps = 0
 
 while True:
     if flag == False or dir == 'quit':
         print('Thanks for playing!')
         break
     if position == 'win':
-        print('You did it!')
+        print('You did it! And only in {} steps! Wow!'.format(steps))
         break
     print_grid(grid, position)
     dir = input('#')
+    steps += 1
     position = move(position, dirs, dir, grid)
