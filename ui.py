@@ -57,8 +57,8 @@ def options_controls(size, dirs):
     return menu_options(size, dirs)
 
 def options_size(size, dirs):
-    size = input('Set the size of the maze (from 3 up to 34 but for comfortable vision you shouldnt exceed 14): ')
-    while not size.isdigit():
+    size = input('Set the size of the maze (3-34): ')
+    while not size.isdigit() or (int(size) < 3 or int(size) > 34):
         print("Wrong input.")
-        size = input('Set the size of the maze (from 3 up to 34 but for comfortable vision you shouldnt exceed 14): ')
+        size = input('Set the size of the maze (3-34): ')
     return menu_options(int(size), dirs)
