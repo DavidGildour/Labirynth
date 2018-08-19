@@ -35,5 +35,6 @@ while True:
         break
     print_grid(grid, position)
     dir = input('#')
-    steps += 1
+    if position != move(position, dirs, dir, grid):
+        steps += 1
     position = move(position, dirs, dir, grid)
