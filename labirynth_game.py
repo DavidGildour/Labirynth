@@ -1,12 +1,13 @@
 from mazegen import *
 from mvmnt_control import move
-from sys import argv
-#MODE '0' - WITHOUT GRID ENNUMERATION VISIBLE
-#MODE '1' (OR ANYTHING ELSE THAN 0 ACTUALLY) - WITH GRID ENNUMERATION VISIBLE
-try:
-    script, mode = argv
-except:
-    mode = 1
+from ui import *
+# from sys import argv
+# #MODE '0' - WITHOUT GRID ENNUMERATION VISIBLE
+# #MODE '1' (OR ANYTHING ELSE THAN 0 ACTUALLY) - WITH GRID ENNUMERATION VISIBLE
+# try:
+#     script, mode = argv
+# except:
+#     mode = 1
 
 #DEFAULT VALUES
 dirs = {
@@ -20,16 +21,20 @@ size = 5
 flag, size, dirs = getmenu(size, dirs)
 
 if flag != False:
-    grid, walls = mazegen(size)
-    position = '{}'.format(grid[size*2][size])
+    grid = mazegen(size)
+    start_cell = grid[size**2 - 1]
+    position = start_cell.row + start_cell.col
+    steps = 0
 
 while True:
     if flag == False or dir == 'quit':
         print('Thanks for playing!')
         break
     if position == 'win':
-        print('You did it!')
+        print('You did it! And only in {} steps! Wow!'.format(steps))
         break
-    print_grid(grid, position, walls, int(mode), size)
+    print_grid(grid, position)
     dir = input('#')
-    position = move(position, dirs, dir, grid, walls)
+    if position != move(position, dirs, dir, grid):
+        steps += 1
+    position = move(position, dirs, dir, grid)
