@@ -43,7 +43,6 @@ while True:
             continue
         else:
             flag = False
-            #position = None
             continue
     print_grid(grid, position)
     dir = input('#')

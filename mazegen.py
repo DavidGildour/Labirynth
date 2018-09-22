@@ -3,6 +3,7 @@ ENHANCE MAZE GENERATING ALGORITHMS"""
 
 from cell import Cell
 from math import sqrt
+from functools import wraps
 #IN ORDER TO ENNUMERATE GRIDS LARGER THAN 9 I NEEDED TO EXPAND THE DIGITS
 #'VOCABULARY'. SO NOW AFTER 9 THERE GOES ALL THE ALPHABET.
 SYMBOLS = '0123456789abcdefghijklmnopqrstuvwyz'
@@ -30,16 +31,28 @@ def remove_walls(a, b):
         a.walls["bottom"] = False
         b.walls["top"] = False
 
-def print_grid(grid, pos):
+def player_pos(func):
+    @wraps(func)
+    def wrapper(grid, pos):
+        i = SYMBOLS.index(pos[0])
+        j = SYMBOLS.index(pos[1])
+        size = int(sqrt(len(grid)))
+        #THIS REPLACES THE GIVEN CELL IN THE GRID (POS ARGUMENT) WITH '##'
+        grid[i + j * size].row = '#'
+        grid[i + j * size].col = '#'
+        func(grid)
+        #THIS REVERSES THE REPLACEMENT AT THE BEGINNING OF THE FUNCTION, THUS
+        #ALLOWING TO REPLACE IT ONCE AGAIN WITHOUT LEAVING A TRACE
+        grid[i + j * size].row = SYMBOLS[i]
+        grid[i + j * size].col = SYMBOLS[j]
+    return wrapper
+
+@player_pos
+def print_grid(grid):
     """THIS IS ONLY FOR PRINTING THE GRID.
     DON'T MESS WITH THE GRID WITHIN THIS FUNCTION.
     """
-    i = SYMBOLS.index(pos[0])
-    j = SYMBOLS.index(pos[1])
     size = int(sqrt(len(grid)))
-    #THIS REPLACES THE GIVEN CELL IN THE GRID (POS ARGUMENT) WITH '##'
-    grid[i + j * size].row = '#'
-    grid[i + j * size].col = '#'
     for cell in grid:
         indx = grid.index(cell)
         if cell.i + cell.j == 0: # the first cell in a grid
@@ -66,10 +79,7 @@ def print_grid(grid, pos):
                 print('  ' + VER_PASSAGE, end = ' ')
         if cell.i + cell.j == (size - 1) * 2: # the last cell in a grid
             print('\n' + (CORNER + HOR_WALL) * (size - 1) + (CORNER + HOR_PASSAGE) + CORNER)
-    #THIS REVERSES THE REPLACEMENT AT THE BEGINNING OF THE FUNCTION, THUS
-    #ALLOWING TO REPLACE IT ONCE AGAIN WITHOUT LEAVING A TRACE
-    grid[i + j * size].row = SYMBOLS[i]
-    grid[i + j * size].col = SYMBOLS[j]
+
 
 def mazegen(size):
     grid = []
@@ -80,7 +90,7 @@ def mazegen(size):
     visited = []
     stack = []
     current = grid[0]
-    print("Generating maze... ", end = '')
+    print("Generating maze... (size {}) ".format(size), end = '')
     while len(visited) != len(grid):
         if not current.visited:
             current.visited = True
