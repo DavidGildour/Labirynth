@@ -33,7 +33,7 @@ def remove_walls(a, b):
 
 def player_pos(func):
     @wraps(func)
-    def wrapper(grid, pos):
+    def wrapper(grid, pos = '00'):
         i = SYMBOLS.index(pos[0])
         j = SYMBOLS.index(pos[1])
         size = int(sqrt(len(grid)))
@@ -68,12 +68,12 @@ def print_grid(grid):
             print(CORNER + '\n' + LEFT_WALL, end = '')
         # printing cells and vertical walls between
         if cell.walls["right"] == True:
-            if cell.row == '#':
+            if cell.row not in SYMBOLS:
                 print(cell.row + cell.col + VER_WALL, end = '')
             else:
                 print('  ' + VER_WALL, end = '')
         else:
-            if cell.row == '#':
+            if cell.row not in SYMBOLS:
                 print(cell.row + cell.col + VER_PASSAGE, end = ' ')
             else:
                 print('  ' + VER_PASSAGE, end = ' ')
@@ -104,3 +104,21 @@ def mazegen(size):
             current = stack.pop()
     print("Done!")
     return grid
+
+def mazesolver(grid):
+    for cell in grid:
+        cell.visited = False
+    stack = []
+    size = int(sqrt(len(grid)))
+    current = grid[size**2 - 1]
+    while current != grid[0]:
+        if not current.visited:
+            current.visited = True
+        next = current.pick_neighbour(grid)
+        if next and not next.visited:
+            stack.append(current)
+            current = next
+        elif len(stack) > 0:
+            current = stack.pop()
+    for cell in stack:
+        cell.row, cell.col = ':', '('

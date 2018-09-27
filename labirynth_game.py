@@ -28,6 +28,12 @@ def main():
         if flag == False or dir == 'quit':
             print('Thanks for playing!')
             break
+        elif dir == 'solve':
+            mazesolver(grid)
+            print_grid(grid)
+            print('Looks like you gave up! Well, good luck next time, bye!')
+            flag = False
+            continue
         elif position == 'win':
             print('You did it! And only in {} steps! Wow!'.format(steps))
             decision = input('Want to continue? (y/n) ')
