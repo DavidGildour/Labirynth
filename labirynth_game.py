@@ -18,7 +18,6 @@ dirs = {
 }
 size = 5
 
-flag, size, dirs = getmenu(size, dirs)
 
 def setup():
     grid = mazegen(size)
@@ -27,25 +26,30 @@ def setup():
     steps = 0
     return grid, start_cell, position, steps
 
-if flag != False:
-    grid, start_cell, position, steps = setup()
+def main():
+    flag, size, dirs = getmenu(size, dirs)
+    if flag != False:
+        grid, start_cell, position, steps = setup()
 
-while True:
-    if flag == False or dir == 'quit':
-        print('Thanks for playing!')
-        break
-    elif position == 'win':
-        print('You did it! And only in {} steps! Wow!'.format(steps))
-        decision = input('Want to continue? (y/n) ')
-        if decision == 'y':
-            size += 1
-            grid, start_cell, position, steps = setup()
-            continue
-        else:
-            flag = False
-            continue
-    print_grid(grid, position)
-    dir = input('#')
-    if position != move(position, dirs, dir, grid):
-        steps += 1
-    position = move(position, dirs, dir, grid)
+    while True:
+        if flag == False or dir == 'quit':
+            print('Thanks for playing!')
+            break
+        elif position == 'win':
+            print('You did it! And only in {} steps! Wow!'.format(steps))
+            decision = input('Want to continue? (y/n) ')
+            if decision == 'y':
+                size += 1
+                grid, start_cell, position, steps = setup()
+                continue
+            else:
+                flag = False
+                continue
+        print_grid(grid, position)
+        dir = input('#')
+        if position != move(position, dirs, dir, grid):
+            steps += 1
+        position = move(position, dirs, dir, grid)
+
+if __name__ == '__main__':
+    main()
