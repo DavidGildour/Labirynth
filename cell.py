@@ -14,6 +14,26 @@ class Cell:
                       "left":   True}
         self.visited = False
 
+    def pick_neighbour(self, grid):
+        neighbors = []
+        size = int(sqrt(len(grid)))
+        i = self.i
+        j = self.j
+        if not self.walls["top"] and not grid[i + (j - 1) * size].visited:
+            neighbors.append(grid[i + (j - 1) * size])
+        if not self.walls["right"] and not grid[(i + 1) + j * size].visited:
+            neighbors.append(grid[(i + 1) + j * size])
+        if not self.walls["bottom"] and not grid[i + (j + 1) * size].visited:
+            neighbors.append(grid[i + (j + 1) * size])
+        if not self.walls["left"] and not grid[(i - 1) + j * size].visited:
+            neighbors.append(grid[(i - 1) + j * size])
+
+        if len(neighbors) > 0:
+            r = randrange(0, len(neighbors))
+            return neighbors[r]
+        else:
+            return None
+
     def check_neighbors(self, grid):
         size = int(sqrt(len(grid)))
         neighbors = []
