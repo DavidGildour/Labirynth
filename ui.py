@@ -10,16 +10,16 @@ def getmenu(size, dirs, optn = '0'):
         4. Exit
 
         """)
-    while optn != 4:
-        if not optn.isdigit():
-            print("Wrong input.")
+    while optn != '4':
+        if not optn.isdigit() or int(optn) > 4:
+            optn = input('#')
             continue
-        optn = int(input('#'))
-        if optn == 1:
+        optn = input('#')
+        if optn == '1':
             return True, size, dirs
-        if optn == 2:
+        if optn == '2':
             return menu_options(size, dirs)
-        if optn == 3:
+        if optn == '3':
             return menu_about(size, dirs)
     return False, size, dirs
 
@@ -31,14 +31,14 @@ def menu_options(size, dirs, optn = '0'):
         2. Set size
         3. Back
         """)
-    while optn != 3:
-        if not optn.isdigit():
-            print("Wrong input.")
+    while optn != '3':
+        if not optn.isdigit() or int(optn) > 3:
+            optn = input('#')
             continue
-        optn = int(input('#'))
-        if optn == 1:
+        optn = input('#')
+        if optn == '1':
             return options_controls(size, dirs)
-        if optn == 2:
+        if optn == '2':
             return options_size(size, dirs)
     return getmenu(size, dirs)
 

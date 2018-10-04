@@ -31,7 +31,7 @@ def main():
         elif dir == 'solve':
             mazesolver(grid)
             print_grid(grid)
-            print('Looks like you gave up! Well, good luck next time, bye!')
+            print('Looks like you gave up after {} steps! Well, good luck next time, bye!'.format(steps))
             flag = False
             continue
         elif position == 'win':
