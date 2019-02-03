@@ -1,4 +1,4 @@
-Labirynth ver. 2.0
+Labirynth ver. 2.1
 A simple, yet fun game where your goal is to exit the maze you're trapped in!
 The mazes created by this program are randomly generated through depth-first recursive backtracking
 algorithm as described here: https://en.wikipedia.org/wiki/Maze_generation_algorithm#Depth-first_search
@@ -11,5 +11,6 @@ up - 'u',
 down - 'd',
 left - 'l',
 right - 'r'.
-To exit the game type 'quit' or choose '4' in the main menu.
+To exit the game type 'quit' or choose '4' in the main menu. If you are struggling to solve the maze you can
+type 'solve' during the game to show the solution (you can't finish the game then, though!).
 Press ENTER to continue.
